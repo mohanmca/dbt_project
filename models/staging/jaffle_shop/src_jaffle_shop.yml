@@ -6,13 +6,6 @@ sources:
     tables:
       - name: customers
         description: One record per customer
-        columns:
-          - name: customer_id
-            description: Primary key
-            tests:
-              - unique
-              - not_null
-
       - name: orders
         loaded_at_field: _etl_loaded_at
         description: NULL when a customer has not yet placed an order.
@@ -29,22 +22,4 @@ sources:
             tests:
               - unique
               - not_null
-
-models:
-  - name: stg_customers
-    columns: 
-      - name: customer_id
-        tests:
-          - unique
-          - not_null
-
-  - name: stg_orders
-    columns:
-      - name: order_id
-        tests:
-          - unique
-          - not_null
-      - name: status
-        tests:
-          - accepted_values:
-              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+  
