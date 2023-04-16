@@ -1,5 +1,5 @@
 with payments as (
-    select * from {{ref('stg_payments')}}
+    select * from {{ source('stripe', 'payments') }}
 )
 select 
     order_id,
