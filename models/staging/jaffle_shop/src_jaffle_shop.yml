@@ -5,8 +5,17 @@ sources:
     database: raw
     tables:
       - name: customers
+        description: One record per customer
+        columns:
+          - name: customer_id
+            description: Primary key
+            tests:
+              - unique
+              - not_null
+
       - name: orders
         loaded_at_field: _etl_loaded_at
+        description: NULL when a customer has not yet placed an order.
         freshness: 
           warn_after:
             count: 12
@@ -14,6 +23,7 @@ sources:
           error_after:
             count: 24
             period: hour
+
 models:
   - name: stg_customers
     columns: 
@@ -31,9 +41,4 @@ models:
       - name: status
         tests:
           - accepted_values:
-              values:
-                - completed2
-                - shipped2
-                - returned2
-                - return_pending2
-                - placed2
+              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
