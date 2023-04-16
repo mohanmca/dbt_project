@@ -14,3 +14,26 @@ sources:
           error_after:
             count: 24
             period: hour
+models:
+  - name: stg_customers
+    columns: 
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values:
+                - completed2
+                - shipped2
+                - returned2
+                - return_pending2
+                - placed2
