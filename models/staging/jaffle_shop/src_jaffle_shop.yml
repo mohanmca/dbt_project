@@ -23,6 +23,12 @@ sources:
           error_after:
             count: 24
             period: hour
+        columns:
+          - name: id
+            description: Primary key
+            tests:
+              - unique
+              - not_null
 
 models:
   - name: stg_customers
